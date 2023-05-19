@@ -135,6 +135,19 @@ lspconfig["gopls"].setup({
 	},
 })
 
+-- helm config
+lspconfig.helm_ls.setup({
+	filetypes = { "helm" },
+	cmd = { "helm_ls", "serve" },
+})
+
+-- configure emmet language server
+lspconfig["emmet_ls"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+})
+
 -- configure emmet language server
 lspconfig["emmet_ls"].setup({
 	capabilities = capabilities,
