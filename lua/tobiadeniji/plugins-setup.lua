@@ -29,11 +29,20 @@ end
 -- add list of plugins to install
 return packer.startup(function(use)
 	-- packer can manage itself
+
+	use({ "towolf/vim-helm" })
+
+	use("stevearc/overseer.nvim")
+
+	use({ "kessejones/git-blame-line.nvim" })
+
 	use("wbthomason/packer.nvim")
 
 	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
 	use("bluz71/vim-nightfly-guicolors") -- preferred colorscheme
+
+	-- use({ "ellisonleao/gruvbox.nvim" })
 
 	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
 

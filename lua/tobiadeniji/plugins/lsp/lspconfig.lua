@@ -92,6 +92,7 @@ lspconfig["gopls"].setup({
 				assign = true,
 				atomic = true,
 				bools = true,
+				completeUnimported = true,
 				composites = true,
 				copylocks = true,
 				deepequalerrors = true,
@@ -135,17 +136,23 @@ lspconfig["gopls"].setup({
 	},
 })
 
--- helm config
+local configs = require("lspconfig.configs")
+local util = require("lspconfig.util")
+if not configs.helm_ls then
+	configs.helm_ls = {
+		default_config = {
+			cmd = { "helm_ls", "serve" },
+			filetypes = { "helm" },
+			root_dir = function(fname)
+				return util.root_pattern("Chart.yaml")(fname)
+			end,
+		},
+	}
+end
+
 lspconfig.helm_ls.setup({
 	filetypes = { "helm" },
 	cmd = { "helm_ls", "serve" },
-})
-
--- configure emmet language server
-lspconfig["emmet_ls"].setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
 })
 
 -- configure emmet language server

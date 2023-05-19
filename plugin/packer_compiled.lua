@@ -109,6 +109,11 @@ _G.packer_plugins = {
     path = "/Users/tobiadeniji/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["git-blame-line.nvim"] = {
+    loaded = true,
+    path = "/Users/tobiadeniji/.local/share/nvim/site/pack/packer/start/git-blame-line.nvim",
+    url = "https://github.com/kessejones/git-blame-line.nvim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/tobiadeniji/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
@@ -186,6 +191,11 @@ _G.packer_plugins = {
     path = "/Users/tobiadeniji/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/nvim-tree/nvim-web-devicons"
   },
+  ["overseer.nvim"] = {
+    loaded = true,
+    path = "/Users/tobiadeniji/.local/share/nvim/site/pack/packer/start/overseer.nvim",
+    url = "https://github.com/stevearc/overseer.nvim"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/tobiadeniji/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -215,6 +225,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tobiadeniji/.local/share/nvim/site/pack/packer/start/vim-ReplaceWithRegister",
     url = "https://github.com/inkarkat/vim-ReplaceWithRegister"
+  },
+  ["vim-helm"] = {
+    loaded = true,
+    path = "/Users/tobiadeniji/.local/share/nvim/site/pack/packer/start/vim-helm",
+    url = "https://github.com/towolf/vim-helm"
   },
   ["vim-maximizer"] = {
     loaded = true,

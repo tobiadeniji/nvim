@@ -1,6 +1,15 @@
 -- set leader key to space
 vim.g.mapleader = " "
 
+-- Leave 12 lines before EOL while scrolling
+vim.opt.scrolloff = 12
+
+-- incremental search
+vim.opt.incsearch = true
+
+-- Remove trailing tilde (~) signs from unused buffers
+vim.opt.fillchars:append({ eob = " " })
+
 local keymap = vim.keymap -- for conciseness
 
 ---------------------
@@ -11,7 +20,7 @@ local keymap = vim.keymap -- for conciseness
 keymap.set("i", "jk", "<ESC>")
 
 -- clear search highlights
-keymap.set("n", "<leader>nh", ":nohl<CR>")
+keymap.set("n", "<leader>c", ":nohl<CR>")
 
 -- delete single character without copying into register
 keymap.set("n", "x", '"_x')
@@ -41,6 +50,12 @@ keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window max
 -- nvim-tree
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 keymap.set("n", "<leader>f", ":NvimTreeFocus<CR>") -- toggle file explorer
+keymap.set("n", "<leader>x", ":setlocal rnu<CR>") -- toggle line numbers in file explorer
+keymap.set("n", "<leader>y", ":setlocal nornu<CR>") -- toggle line numbers in file explorer
+
+-- Git blame
+keymap.set("n", "<leader>b", ":GitBlameLineShow<CR>") -- toggle git blame on line
+keymap.set("n", "<leader>bn", ":GitBlameLineClear<CR>") -- toggle git blame on line
 
 -- telescope
 keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
@@ -57,3 +72,10 @@ keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current c
 
 -- restart lsp server (not on youtube nvim video)
 keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+
+-- move code block
+keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- append line below to current line
+keymap.set("n", "J", "mzJ`z")
