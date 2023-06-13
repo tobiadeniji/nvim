@@ -27,7 +27,7 @@ mason_lspconfig.setup({
 		"golangci_lint_ls",
 		"bashls",
 		"dockerls",
-		-- "helm-ls",
+		"helm_ls",
 	},
 	-- auto-install configured servers (with lspconfig)
 	automatic_installation = false, -- not the same as ensure_installed

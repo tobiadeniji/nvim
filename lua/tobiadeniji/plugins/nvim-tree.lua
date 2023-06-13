@@ -64,4 +64,4 @@ end
 -- Add line numbers to nvimtree
 -- require("nvim-tree.view").View.winopts.relativenumber = false
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+-- vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })

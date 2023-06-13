@@ -150,10 +150,10 @@ if not configs.helm_ls then
 	}
 end
 
-lspconfig.helm_ls.setup({
-	filetypes = { "helm" },
-	cmd = { "helm_ls", "serve" },
-})
+-- lspconfig.helm_ls.setup({
+-- 	filetypes = { "helm" },
+-- 	cmd = { "helm_ls", "serve" },
+-- })
 
 -- configure emmet language server
 lspconfig["emmet_ls"].setup({
