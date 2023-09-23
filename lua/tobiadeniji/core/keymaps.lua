@@ -47,6 +47,13 @@ keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 -- vim-maximizer
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window maximization
 
+-- alpha-vim
+keymap.set("n", "<leader>a", ":Alpha<CR>") -- toggle alpha-vim home screen
+
+-- nvim buffer manipulations
+keymap.set("n", "<leader>q", ":wqa!<CR>") -- write buffer to file and close neovim
+keymap.set("n", "<leader>w", ":w<CR>") -- write buffer to file only
+
 -- nvim-tree
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 keymap.set("n", "<leader>f", ":NvimTreeFocus<CR>") -- toggle file explorer
