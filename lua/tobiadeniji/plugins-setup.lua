@@ -32,17 +32,22 @@ return packer.startup(function(use)
 
 	use({ "towolf/vim-helm" })
 
-	use("stevearc/overseer.nvim")
+	use({
+		"stevearc/overseer.nvim",
+		config = function()
+			require("overseer").setup()
+		end,
+	})
 
-	use({ "kessejones/git-blame-line.nvim" })
+	use("f-person/git-blame.nvim")
+
+	-- use({ "kessejones/git-blame-line.nvim" })
 
 	use("wbthomason/packer.nvim")
 
 	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
 	use("bluz71/vim-nightfly-guicolors") -- preferred colorscheme
-
-	-- use({ "ellisonleao/gruvbox.nvim" })
 
 	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
 
@@ -74,6 +79,7 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-path") -- source for file system paths
 
 	-- alpha nvim
+	-- Neovim splash screen with ASCII art
 	use({
 		"goolord/alpha-nvim",
 		requires = { "BlakeJC94/alpha-nvim-fortune" },
@@ -124,4 +130,51 @@ return packer.startup(function(use)
 	if packer_bootstrap then
 		require("packer").sync()
 	end
+
+	use({
+		"olexsmir/gopher.nvim",
+		ft = "go",
+		config = function(_, opts)
+			require("gopher").setup(opts)
+		end,
+		build = function()
+			vim.cmd([[silent! GoInstallDeps]])
+		end,
+	})
+
+	-- automatically save buffer changes
+	use({
+		"Pocco81/auto-save.nvim",
+		config = function()
+			require("auto-save").setup({
+				-- your config goes here
+				--  or just leave it empty :)
+			})
+		end,
+	})
+
+	-- trying out noice
+	use("folke/noice.nvim")
+	use("MunifTanjim/nui.nvim")
+	use("rcarriga/nvim-notify")
+
+	-- merge vim statusline in the tmux statusline tings and tings
+	-- use("vimpostor/vim-tpipeline")
+
+	-- reload last session
+	use("rmagatti/auto-session")
+
+	-- for aesthetically pleasing ui
+	use({ "stevearc/dressing.nvim" })
+
+	-- show indentations
+	use("lukas-reineke/indent-blankline.nvim")
+
+	use({ "akinsho/toggleterm.nvim", tag = "*" })
+
+	-- use({
+	-- 	"akinsho/bufferline.nvim",
+	-- 	tag = "*",
+	-- 	requires = "nvim-tree/nvim-web-devicons",
+	-- })
 end)

@@ -31,6 +31,8 @@ treesitter.setup({
 		"lua",
 		"vim",
 		"go",
+		"helm",
+		"python",
 		"dockerfile",
 		"gitignore",
 	},

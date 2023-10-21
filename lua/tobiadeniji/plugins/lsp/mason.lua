@@ -28,6 +28,7 @@ mason_lspconfig.setup({
 		"bashls",
 		"dockerls",
 		"helm_ls",
+		"terraformls",
 	},
 	-- auto-install configured servers (with lspconfig)
 	automatic_installation = false, -- not the same as ensure_installed
@@ -37,8 +38,10 @@ mason_null_ls.setup({
 	-- list of formatters & linters for mason to install
 	ensure_installed = {
 		"stylua", -- lua formatter
+		"python-lsp-server",
 		"golangci_lint_ls",
 		"gopls",
+		"bashls",
 	},
 	-- auto-install configured formatters & linters (with null-ls)
 	automatic_installation = true,

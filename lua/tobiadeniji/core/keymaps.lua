@@ -7,10 +7,27 @@ vim.opt.scrolloff = 12
 -- incremental search
 vim.opt.incsearch = true
 
+-- Cleanup nightflyWinSeparator
+-- https://github.com/bluz71/vim-nightfly-colors#nightflywinseparator
+vim.g.nightflyWinSeparator = 2
+vim.opt.fillchars = {
+	horiz = "━",
+	horizup = "┻",
+	horizdown = "┳",
+	vert = "┃",
+	vertleft = "┫",
+	vertright = "┣",
+	verthoriz = "╋",
+}
+
 -- Remove trailing tilde (~) signs from unused buffers
 vim.opt.fillchars:append({ eob = " " })
 
-local keymap = vim.keymap -- for conciseness
+vim.notify = require("notify")
+vim.notify("Welcome back, Tobi 😀\nHappy coding 🚀")
+
+-- for conciseness
+local keymap = vim.keymap
 
 ---------------------
 -- General Keymaps
@@ -47,6 +64,9 @@ keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 -- vim-maximizer
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window maximization
 
+-- Toggle auto-save
+keymap.set("n", "<leader>aa", ":ASToggle<CR>") -- toggle auto save buffer
+
 -- alpha-vim
 keymap.set("n", "<leader>a", ":Alpha<CR>") -- toggle alpha-vim home screen
 
@@ -56,20 +76,24 @@ keymap.set("n", "<leader>w", ":w<CR>") -- write buffer to file only
 
 -- nvim-tree
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
-keymap.set("n", "<leader>f", ":NvimTreeFocus<CR>") -- toggle file explorer
+keymap.set("n", "<leader>f", ":NvimTreeFocus<CR>") -- make file explorer active
 keymap.set("n", "<leader>x", ":setlocal rnu<CR>") -- toggle line numbers in file explorer
 keymap.set("n", "<leader>y", ":setlocal nornu<CR>") -- toggle line numbers in file explorer
 
 -- Git blame
-keymap.set("n", "<leader>b", ":GitBlameLineShow<CR>") -- toggle git blame on line
-keymap.set("n", "<leader>bn", ":GitBlameLineClear<CR>") -- toggle git blame on line
+keymap.set("n", "<leader>b", ":GitBlameToggle<CR>") -- toggle git blame on line
+-- keymap.set("n", "<leader>bn", ":GitBlameLineClear<CR>") -- toggle git blame on line
+
+-- Gitsigns, show recent changes
+keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>") -- toggle gitsigns preview_hunk
 
 -- telescope
 keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
-keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
+keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
 keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
 keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
+keymap.set("n", "<leader>n", "<cmd>Telescope noice<cr>") -- list all noice notifications
 
 -- telescope git commands (not on youtube nvim video)
 keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git commits (use <cr> to checkout) ["gc" for git commits]
@@ -84,5 +108,31 @@ keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if ne
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+-- run toggleterm
+keymap.set("n", "<leader>m", ":lua require('toggleterm').setup()<CR>")
+
 -- append line below to current line
 keymap.set("n", "J", "mzJ`z")
+
+-- move cursor right
+keymap.set("n", ".", "w")
+keymap.set("n", ",", "b")
+
+--------------------------------------------------------------
+--  My Other Custom Mappings (this might get a little messy!)
+--------------------------------------------------------------
+
+-- Run normal mode cmds in insert mode
+-- keymap.set("i", "<leader>o", "<C-o>")
+
+-- Delete to beginning of line in insert mode
+-- keymap.set("i", "<leader>u", "<C-u>")
+
+-- Delete word in insert mode
+-- keymap.set("i", "<leader>w", "<C-w>")
+
+-- remapped } and { for faster scrolling
+keymap.set("n", "]", "}")
+keymap.set("n", "[", "{")
+
+keymap.set("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>", {})
