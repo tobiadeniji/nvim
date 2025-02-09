@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 
 -- Leave 12 lines before EOL while scrolling
-vim.opt.scrolloff = 12
+vim.opt.scrolloff = 6
 
 -- incremental search
 vim.opt.incsearch = true
@@ -82,10 +82,10 @@ keymap.set("n", "<leader>y", ":setlocal nornu<CR>") -- toggle line numbers in fi
 
 -- Git blame
 keymap.set("n", "<leader>b", ":GitBlameToggle<CR>") -- toggle git blame on line
--- keymap.set("n", "<leader>bn", ":GitBlameLineClear<CR>") -- toggle git blame on line
 
 -- Gitsigns, show recent changes
 keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>") -- toggle gitsigns preview_hunk
+-- keymap.set("n", "<leader>d", ":Gitsigns preview_hunk<CR>") -- toggle gitsigns preview_hunk
 
 -- telescope
 keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
@@ -134,5 +134,9 @@ keymap.set("n", ",", "b")
 -- remapped } and { for faster scrolling
 keymap.set("n", "]", "}")
 keymap.set("n", "[", "{")
+
+-- move back and forward with "," and "." in normal mode
+keymap.set("n", ",", "b")
+keymap.set("n", ".", "w")
 
 keymap.set("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>", {})

@@ -29,6 +29,7 @@ mason_lspconfig.setup({
 		"dockerls",
 		"helm_ls",
 		"terraformls",
+		"solargraph",
 	},
 	-- auto-install configured servers (with lspconfig)
 	automatic_installation = false, -- not the same as ensure_installed
@@ -42,6 +43,7 @@ mason_null_ls.setup({
 		"golangci_lint_ls",
 		"gopls",
 		"bashls",
+		"rubocop",
 	},
 	-- auto-install configured formatters & linters (with null-ls)
 	automatic_installation = true,
