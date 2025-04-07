@@ -23,9 +23,6 @@ vim.opt.fillchars = {
 -- Remove trailing tilde (~) signs from unused buffers
 vim.opt.fillchars:append({ eob = " " })
 
-vim.notify = require("notify")
-vim.notify("Welcome back, Tobi 😀\nHappy coding 🚀")
-
 -- for conciseness
 local keymap = vim.keymap
 
@@ -33,8 +30,8 @@ local keymap = vim.keymap
 -- General Keymaps
 ---------------------
 
--- use jk to exit insert mode
-keymap.set("i", "jk", "<ESC>")
+-- use Caps Lock to exit insert mode
+keymap.set("n", "<S-Space>", "<ESC>")
 
 -- clear search highlights
 keymap.set("n", "<leader>c", ":nohl<CR>")
@@ -134,6 +131,8 @@ keymap.set("n", ",", "b")
 -- remapped } and { for faster scrolling
 keymap.set("n", "]", "}")
 keymap.set("n", "[", "{")
+
+keymap.set("n", "<C-r", "r")
 
 -- move back and forward with "," and "." in normal mode
 keymap.set("n", ",", "b")

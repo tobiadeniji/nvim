@@ -29,7 +29,6 @@ mason_lspconfig.setup({
 		"dockerls",
 		"helm_ls",
 		"terraformls",
-		"solargraph",
 	},
 	-- auto-install configured servers (with lspconfig)
 	automatic_installation = false, -- not the same as ensure_installed
@@ -38,7 +37,7 @@ mason_lspconfig.setup({
 mason_null_ls.setup({
 	-- list of formatters & linters for mason to install
 	ensure_installed = {
-		"stylua", -- lua formatter
+		"stylua",
 		"python-lsp-server",
 		"golangci_lint_ls",
 		"gopls",

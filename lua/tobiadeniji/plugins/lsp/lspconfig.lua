@@ -140,33 +140,19 @@ lspconfig["lua_ls"].setup({
 })
 
 lspconfig["solargraph"].setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-	settings = {
-		solargraph = {
-			diagnostics = true,
-			formatting = true,
-			completion = true,
-			hover = true,
-			symbols = true,
-			autoformat = true, -- Autoformat files on save
-			useBundler = true, -- Use bundled gems (if using Bundler)
-			folding = true, -- Enable code folding
-			references = true, -- Enable "Go to References"
-			rename = true, -- Enable smart renaming
-			logLevel = "warn", -- Set logging level (options: "debug", "info", "warn", "error")
-
-			-- If using Solargraph with a workspace, specify root patterns
-			root_dir = vim.fn.getcwd(), -- Set the root directory dynamically
-
-			-- Set the transport mode (Auto, Direct, Stdio)
-			transport = "stdio",
-
-			-- Specify additional command line arguments for `solargraph`
-			extra_args = { "--completion", "--diagnostics" },
-
-			-- Improve completion performance by disabling unused features
-			checkGemVersion = false, -- Avoid unnecessary gem version checks
-		},
-	},
+  capabilities = capabilities,
+  on_attach = on_attach,
+  root_dir = function(fname)
+    return require("lspconfig.util").root_pattern("Gemfile", ".git")(fname) or vim.fn.getcwd()
+  end,
+  settings = {
+    solargraph = {
+      diagnostics = true,
+      formatting = true,
+      useBundler = true,
+      logLevel = "warn",
+      transport = "stdio",
+      checkGemVersion = false,
+    },
+  },
 })
