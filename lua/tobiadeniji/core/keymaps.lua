@@ -30,8 +30,8 @@ local keymap = vim.keymap
 -- General Keymaps
 ---------------------
 
--- use Caps Lock to exit insert mode
-keymap.set("n", "<S-Space>", "<ESC>")
+-- use jj to exit insert mode
+keymap.set("i", "jj", "<ESC>")
 
 -- clear search highlights
 keymap.set("n", "<leader>c", ":nohl<CR>")
@@ -82,7 +82,6 @@ keymap.set("n", "<leader>b", ":GitBlameToggle<CR>") -- toggle git blame on line
 
 -- Gitsigns, show recent changes
 keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>") -- toggle gitsigns preview_hunk
--- keymap.set("n", "<leader>d", ":Gitsigns preview_hunk<CR>") -- toggle gitsigns preview_hunk
 
 -- telescope
 keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
@@ -106,18 +105,37 @@ keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- run toggleterm
-keymap.set("n", "<leader>m", ":lua require('toggleterm').setup()<CR>")
+keymap.set("n", "<leader>mm", ":lua require('toggleterm').setup()<CR>")
+keymap.set("n", "<leader>m", ":ToggleTerm<CR>")
 
 -- append line below to current line
 keymap.set("n", "J", "mzJ`z")
 
--- move cursor right
-keymap.set("n", ".", "w")
-keymap.set("n", ",", "b")
-
 --------------------------------------------------------------
 --  My Other Custom Mappings (this might get a little messy!)
 --------------------------------------------------------------
+keymap.set("n", "<A-Down>", "}")
+keymap.set("n", "<A-Up>", "{")
+keymap.set("i", "<A-Down>", "<C-\\><C-O>}")
+keymap.set("i", "<A-Up>", "<C-\\><C-O>{")
+
+keymap.set("n", "<C-r>", "r")
+
+-- move back and forward with by a word.
+keymap.set("n", "<A-Left>", "b")
+keymap.set("n", "<A-Right>", "w")
+keymap.set("v", "<A-Left>", "b")
+keymap.set("v", "<A-Right>", "w")
+keymap.set("i", "<A-Left>", "<C-\\><C-O>b")
+keymap.set("i", "<A-Right>", "<C-\\><C-O>w")
+
+keymap.set("i", "<C-Left>", "<C-\\><C-O>0")
+keymap.set("i", "<C-Right>", "<C-\\><C-O>$")
+
+keymap.set("n", "<C-Left>", "0")
+keymap.set("n", "<C-Right>", "$")
+
+keymap.set("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>", {})
 
 -- Run normal mode cmds in insert mode
 -- keymap.set("i", "<leader>o", "<C-o>")
@@ -128,14 +146,4 @@ keymap.set("n", ",", "b")
 -- Delete word in insert mode
 -- keymap.set("i", "<leader>w", "<C-w>")
 
--- remapped } and { for faster scrolling
-keymap.set("n", "]", "}")
-keymap.set("n", "[", "{")
-
-keymap.set("n", "<C-r", "r")
-
--- move back and forward with "," and "." in normal mode
-keymap.set("n", ",", "b")
-keymap.set("n", ".", "w")
-
-keymap.set("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>", {})
+-- remapped } and { for faster scrolling 

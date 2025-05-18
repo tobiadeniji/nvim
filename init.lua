@@ -18,7 +18,9 @@ require("tobiadeniji.plugins.gitblame")
 require("tobiadeniji.plugins.alpha")
 require("tobiadeniji.plugins.auto-session")
 require("overseer").setup()
-require("noice").setup()
+require("noice").setup({
+  -- debug = true,
+})
 require("ibl").setup()
 require("tobiadeniji.plugins.toggleterm")
 require("tobiadeniji.plugins.notify")
