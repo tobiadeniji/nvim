@@ -1,8 +1,8 @@
 -- set leader key to space
 vim.g.mapleader = " "
 
--- Leave 12 lines before EOL while scrolling
-vim.opt.scrolloff = 6
+-- Leave x number of lines before EOL while scrolling
+vim.opt.scrolloff = 8
 
 -- incremental search
 vim.opt.incsearch = true
@@ -154,5 +154,5 @@ keymap.set("i", "<M-Down>", "<C-\\><C-O>}")
 keymap.set("n", "<CR>", "i", { noremap = true, silent = true })
 keymap.set("n", "<Space><Space>", "i", { noremap = true, silent = true })
 
--- keymap.set('n', '<leader>q', require('flash_pane').flash, {desc = "Flash current pane"})
+-- Show active nvim pane.
 keymap.set("n", "<leader>p", ":FlashPane<CR>")
