@@ -1,5 +1,5 @@
--- Import null-ls safely
-local null_ls_ok, null_ls = pcall(require, "null-ls")
+-- Import none-ls safely
+local null_ls_ok, null_ls = pcall(require, "none-ls")
 if not null_ls_ok then
   return
 end
@@ -30,27 +30,28 @@ null_ls.setup({
 
   on_attach = function(client, bufnr)
     if client.name == "null-ls" then
-      -- First clear any existing autocommands for this buffer
+      -- Clear existing autocommands
       vim.api.nvim_clear_autocmds({
         group = lsp_format_augroup,
         buffer = bufnr
       })
 
-      -- Then create our formatting autocommand
+      -- Create formatting autocommand
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = lsp_format_augroup,
         buffer = bufnr,
         callback = function()
-          -- Use null-ls formatting directly
-          require("null-ls").format({
+          -- Use none-ls formatting directly
+          require("none-ls").format({
             bufnr = bufnr,
             filter = function(cl)
               return cl.name == "null-ls"
             end,
-            async = false -- Important for write operations
+            async = false
           })
         end
       })
     end
   end
 })
+

@@ -31,7 +31,7 @@ local keymap = vim.keymap
 ---------------------
 
 -- use jj to exit insert mode
-keymap.set("i", "jj", "<ESC>")
+keymap.set("i", "//", "<ESC>")
 
 -- clear search highlights
 keymap.set("n", "<leader>c", ":nohl<CR>")
@@ -114,20 +114,20 @@ keymap.set("n", "J", "mzJ`z")
 --------------------------------------------------------------
 --  My Other Custom Mappings (this might get a little messy!)
 --------------------------------------------------------------
-keymap.set("n", "<A-Down>", "}")
-keymap.set("n", "<A-Up>", "{")
-keymap.set("i", "<A-Down>", "<C-\\><C-O>}")
-keymap.set("i", "<A-Up>", "<C-\\><C-O>{")
+keymap.set("n", "<D-Down>", "}")
+keymap.set("n", "<D-Up>", "{")
+keymap.set("i", "<D-Down>", "<C-\\><C-O>}")
+keymap.set("i", "<D-Up>", "<C-\\><C-O>{")
 
 keymap.set("n", "<C-r>", "r")
 
 -- move back and forward with by a word.
-keymap.set("n", "<A-Left>", "b")
-keymap.set("n", "<A-Right>", "w")
-keymap.set("v", "<A-Left>", "b")
-keymap.set("v", "<A-Right>", "w")
-keymap.set("i", "<A-Left>", "<C-\\><C-O>b")
-keymap.set("i", "<A-Right>", "<C-\\><C-O>w")
+keymap.set("n", "<D-Left>", "b")
+keymap.set("n", "<D-Right>", "w")
+keymap.set("v", "<D-Left>", "b")
+keymap.set("v", "<D-Right>", "w")
+keymap.set("i", "<D-Left>", "<C-\\><C-O>b")
+keymap.set("i", "<D-Right>", "<C-\\><C-O>w")
 
 keymap.set("i", "<C-Left>", "<C-\\><C-O>0")
 keymap.set("i", "<C-Right>", "<C-\\><C-O>$")
@@ -137,13 +137,22 @@ keymap.set("n", "<C-Right>", "$")
 
 keymap.set("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>", {})
 
--- Run normal mode cmds in insert mode
--- keymap.set("i", "<leader>o", "<C-o>")
+--------------------------------------------------------
+keymap.set("i", "<M-Left>", "<C-\\><C-O>b")
+keymap.set("i", "<M-Right>", "<C-\\><C-O>w")
+--------------------------------------------------------
 
--- Delete to beginning of line in insert mode
--- keymap.set("i", "<leader>u", "<C-u>")
+keymap.set({ "n", "v" }, "<M-Left>", "b")
+keymap.set({ "n", "v" }, "<M-Right>", "w")
 
--- Delete word in insert mode
--- keymap.set("i", "<leader>w", "<C-w>")
+keymap.set("n", "<M-Up>", "{")
+keymap.set("n", "<M-Down>", "}")
 
--- remapped } and { for faster scrolling 
+keymap.set("i", "<M-Up>", "<C-\\><C-O>{")
+keymap.set("i", "<M-Down>", "<C-\\><C-O>}")
+
+keymap.set("n", "<CR>", "i", { noremap = true, silent = true })
+keymap.set("n", "<Space><Space>", "i", { noremap = true, silent = true })
+
+-- keymap.set('n', '<leader>q', require('flash_pane').flash, {desc = "Flash current pane"})
+keymap.set("n", "<leader>p", ":FlashPane<CR>")

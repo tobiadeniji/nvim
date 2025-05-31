@@ -16,5 +16,3 @@ require("toggleterm").setup({
 	},
 	close_on_exit = true, -- Close the terminal when the process exits
 })
-
--- :lua require('toggleterm').setup()

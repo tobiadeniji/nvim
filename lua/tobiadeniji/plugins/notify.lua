@@ -24,3 +24,7 @@ notify.setup({
 })
 
 notify("Welcome back, Tobi 😀\nHappy coding 🚀")
+
+-- require("noice").setup({
+--   -- debug = true,
+-- })

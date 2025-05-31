@@ -109,7 +109,8 @@ return packer.startup(function(use)
 	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
 	-- formatting & linting
-	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
+	-- use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
+  use("nvimtools/none-ls.nvim")
 	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
 
 	-- treesitter configuration
@@ -155,7 +156,10 @@ return packer.startup(function(use)
 
 	-- trying out noice
 	use("folke/noice.nvim")
-	use("MunifTanjim/nui.nvim")
+  use {
+     'MunifTanjim/nui.nvim',
+        commit = "8d3bce9764e627b62b07424e0df77f680d47ffdb",
+   }
 	use("rcarriga/nvim-notify")
 
 	-- merge vim statusline in the tmux statusline tings and tings
