@@ -1,73 +1,61 @@
--- import lspconfig plugin safely
-local lspconfig_status, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_status then
-	return
-end
-
--- import cmp-nvim-lsp plugin safely
+-- cmp-nvim-lsp
 local cmp_nvim_lsp_status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmp_nvim_lsp_status then
 	return
 end
 
-local keymap = vim.keymap -- for conciseness
+local keymap = vim.keymap
 
--- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
-	-- keybind options
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
-	-- set keybinds
-	keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references
-	keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts) -- got to declaration
-	keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
-	keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts) -- go to implementation
-	keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts) -- see available code actions
-	keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts) -- smart rename
-	keymap.set("n", "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
-	keymap.set("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show diagnostics for cursor
-	keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to previous diagnostic in buffer
-	keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer
-	keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
-	keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
+	keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts)
+	keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+	keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts)
+	keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+	keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
+	keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
+	keymap.set("n", "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+	keymap.set("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
+	keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+	keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+	keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
+	keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts)
 
-	-- typescript specific keymaps (e.g. rename file and update imports)
-	if client.name == "tsserver" then
-		keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
-		keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
-		keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>") -- remove unused variables (not in youtube nvim video)
+	-- keep only if you still use a plugin exposing these commands
+	if client.name == "tsserver" or client.name == "ts_ls" then
+		keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>", opts)
+		keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>", opts)
+		keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>", opts)
 	end
 end
 
--- used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
 vim.diagnostic.config({
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN]  = "",
-      [vim.diagnostic.severity.HINT]  = "ﴞ",
-      [vim.diagnostic.severity.INFO]  = "",
-    },
-  },
-  -- Optionally configure virtual text, underline, etc.
-  virtual_text = true,
-  update_in_insert = false,
-  severity_sort = true,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.HINT] = "ﴞ",
+			[vim.diagnostic.severity.INFO] = "",
+		},
+	},
+	virtual_text = true,
+	update_in_insert = false,
+	severity_sort = true,
 })
 
-lspconfig["gopls"].setup({
+vim.lsp.config("gopls", {
 	capabilities = capabilities,
 	on_attach = on_attach,
-	setting = {
+	settings = {
 		gopls = {
 			analyses = {
 				assign = true,
 				atomic = true,
 				bools = true,
-				completeUnimported = true,
-				composites = true,
+				composite = true,
 				copylocks = true,
 				deepequalerrors = true,
 				embed = true,
@@ -90,7 +78,6 @@ lspconfig["gopls"].setup({
 				stdmethods = true,
 				stringintconv = true,
 				structtag = true,
-				testinggoroutine = true,
 				tests = true,
 				timeformat = true,
 				unmarshal = true,
@@ -98,10 +85,9 @@ lspconfig["gopls"].setup({
 				unsafeptr = true,
 				unusedparams = true,
 				unusedresult = true,
-				unusedvariable = true,
-				unusedwrite = true,
 				useany = true,
 			},
+			completeUnimported = true,
 			hoverKind = "FullDocumentation",
 			linkTarget = "pkg.go.dev",
 			usePlaceholders = true,
@@ -110,32 +96,15 @@ lspconfig["gopls"].setup({
 	},
 })
 
-local configs = require("lspconfig.configs")
-local util = require("lspconfig.util")
-if not configs.helm_ls then
-	configs.helm_ls = {
-		default_config = {
-			cmd = { "helm_ls", "serve" },
-			filetypes = { "helm" },
-			root_dir = function(fname)
-				return util.root_pattern("Chart.yaml")(fname)
-			end,
-		},
-	}
-end
-
--- configure lua server (with special settings)
-lspconfig["lua_ls"].setup({
+vim.lsp.config("lua_ls", {
 	capabilities = capabilities,
 	on_attach = on_attach,
-	settings = { -- custom settings for lua
+	settings = {
 		Lua = {
-			-- make the language server recognize "vim" global
 			diagnostics = {
 				globals = { "vim" },
 			},
 			workspace = {
-				-- make language server aware of runtime files
 				library = {
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 					[vim.fn.stdpath("config") .. "/lua"] = true,
@@ -145,20 +114,42 @@ lspconfig["lua_ls"].setup({
 	},
 })
 
-lspconfig["solargraph"].setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  root_dir = function(fname)
-    return require("lspconfig.util").root_pattern("Gemfile", ".git")(fname) or vim.fn.getcwd()
-  end,
-  settings = {
-    solargraph = {
-      diagnostics = true,
-      formatting = true,
-      useBundler = true,
-      logLevel = "warn",
-      transport = "stdio",
-      checkGemVersion = false,
-    },
-  },
+vim.lsp.config("solargraph", {
+	capabilities = capabilities,
+	on_attach = on_attach,
+	root_dir = function(bufnr, on_dir)
+		local fname = vim.api.nvim_buf_get_name(bufnr)
+		local root = vim.fs.dirname(vim.fs.find({ "Gemfile", ".git" }, {
+			upward = true,
+			path = fname,
+		})[1])
+
+		on_dir(root or vim.fn.getcwd())
+	end,
+	settings = {
+		solargraph = {
+			diagnostics = true,
+			formatting = true,
+			useBundler = true,
+			logLevel = "warn",
+			transport = "stdio",
+			checkGemVersion = false,
+		},
+	},
 })
+
+-- custom server not shipped by default
+vim.lsp.config("helm_ls", {
+	cmd = { "helm_ls", "serve" },
+	filetypes = { "helm" },
+	root_dir = function(bufnr, on_dir)
+		local fname = vim.api.nvim_buf_get_name(bufnr)
+		local chart = vim.fs.find("Chart.yaml", { upward = true, path = fname })[1]
+		on_dir(chart and vim.fs.dirname(chart) or nil)
+	end,
+})
+
+vim.lsp.enable("gopls")
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("solargraph")
+vim.lsp.enable("helm_ls")
