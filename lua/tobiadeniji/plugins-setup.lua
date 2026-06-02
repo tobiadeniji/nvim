@@ -39,7 +39,7 @@ return packer.startup(function(use)
 		end,
 	})
 
-	use("f-person/git-blame.nvim")
+	use {"f-person/git-blame.nvim", lock = true, }
 
 	-- use({ "kessejones/git-blame-line.nvim" })
 
@@ -86,8 +86,9 @@ return packer.startup(function(use)
 	})
 
 	-- snippets
-	use("L3MON4D3/LuaSnip") -- snippet engine
-	use("saadparwaiz1/cmp_luasnip") -- for autocompletion
+	use { "L3MON4D3/LuaSnip", lock = true, } -- snippet engine
+
+  use("saadparwaiz1/cmp_luasnip") -- for autocompletion
 	use("rafamadriz/friendly-snippets") -- useful snippets
 
 	-- managing & installing lsp servers, linters & formatters
@@ -105,7 +106,7 @@ return packer.startup(function(use)
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
 	}) -- enhanced lsp uis
-	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
+	use {"jose-elias-alvarez/typescript.nvim", lock = true } -- additional functionality for typescript server (e.g. rename file & update imports)
 	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
 	-- formatting & linting
@@ -181,4 +182,18 @@ return packer.startup(function(use)
 	-- 	tag = "*",
 	-- 	requires = "nvim-tree/nvim-web-devicons",
 	-- })
+  --
+
+  use {
+    'greggh/claude-code.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+    },
+    config = function()
+      require('claude-code').setup({
+        auto_cwd = true,
+      })
+  end
+  }
+
 end)

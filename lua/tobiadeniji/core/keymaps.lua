@@ -156,3 +156,6 @@ keymap.set("n", "<Space><Space>", "i", { noremap = true, silent = true })
 
 -- Show active nvim pane.
 keymap.set("n", "<leader>p", ":FlashPane<CR>")
+
+-- Toggle Claude
+keymap.set("n", "<leader>cc", "<cmd>ClaudeCode<CR>")
