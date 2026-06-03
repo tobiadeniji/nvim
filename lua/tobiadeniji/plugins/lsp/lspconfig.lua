@@ -22,7 +22,6 @@ local on_attach = function(client, bufnr)
 	keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
 	keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts)
 
-	-- keep only if you still use a plugin exposing these commands
 	if client.name == "tsserver" or client.name == "ts_ls" then
 		keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>", opts)
 		keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>", opts)
@@ -129,7 +128,7 @@ vim.lsp.config("solargraph", {
 	settings = {
 		solargraph = {
 			diagnostics = true,
-			formatting = true,
+			formatting = false,
 			useBundler = true,
 			logLevel = "warn",
 			transport = "stdio",
@@ -138,7 +137,11 @@ vim.lsp.config("solargraph", {
 	},
 })
 
--- custom server not shipped by default
+vim.lsp.config("rubocop", {
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+
 vim.lsp.config("helm_ls", {
 	cmd = { "helm_ls", "serve" },
 	filetypes = { "helm" },
@@ -152,4 +155,5 @@ vim.lsp.config("helm_ls", {
 vim.lsp.enable("gopls")
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("solargraph")
+vim.lsp.enable("rubocop")
 vim.lsp.enable("helm_ls")
